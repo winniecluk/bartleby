@@ -57,6 +57,10 @@ The app needs to be installed in both Confluence and JIRA for full functionality
 - Use the `forge install` command when you want to install the app on a new site.
 - You may choose to use `forge tunnel` while working to see your changes without having to deploy. You will need to save the changes and run `npm run build` in the `static/bartleby` directory.
 
+## Documentation
+- Jira Cloud REST API: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro
+
+
 ## Support
 
 See [Get help](https://developer.atlassian.com/platform/forge/get-help/) for how to get help and provide feedback.

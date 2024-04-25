@@ -7,7 +7,7 @@ export async function getMyself () {
 }
 
 export async function getMyIssues (userId, status) {
-  const results = await requestJira(`/rest/api/3/search?jql=assignee=${userId} AND status="PEER REVIEW"`);
+  const results = await requestJira(`/rest/api/3/search?jql=assignee=${userId} AND status="${status}"`);
   return results.json();
   //userIssues.issues[0].key
 }

@@ -45,7 +45,7 @@ export async function getOrganizationRepositoryNames () {
   }
 }
 
-export async function getBranches (repo) {
+export async function getBranchDetails (repo) {
   try {
     const results = await octokit.request(`GET /repos/${ORGANIZATION_NAME}/${repo}/branches`, {
       owner: ORGANIZATION_NAME,
@@ -78,7 +78,21 @@ export async function getCommit (repo, ref) {
     const results = await octokit.request(`GET /repos/${ORGANIZATION_NAME}/${repo}/commits/${ref}`, {
       owner: ORGANIZATION_NAME,
       repo,
-      ref
+      ref,
+      headers
+    });
+    return results.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getPRs (repo) {
+  try {
+    const results = await octokit.request(`GET /repos/${ORGANIZATION_NAME}/${repo}/pulls`, {
+      owner: ORGANIZATION_NAME,
+      repo,
+      headers
     });
     return results.data;
   } catch (error) {

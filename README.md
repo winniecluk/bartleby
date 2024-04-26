@@ -59,7 +59,11 @@ The app needs to be installed in both Confluence and JIRA for full functionality
 
 ## Documentation
 - Jira Cloud REST API: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro
+- Github REST API: https://docs.github.com/en/rest
 
+## Issues
+- Can't open link in new window
+- JIRA won't give us Github data
 
 ## Support
 

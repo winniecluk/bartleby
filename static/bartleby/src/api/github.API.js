@@ -1,6 +1,7 @@
 import api from "@forge/api";
 import { Octokit } from "octokit";
 import { invoke } from '@forge/bridge';
+import { ORGANIZATION_NAME } from "../const";
 
 const headers = {
   'X-GitHub-Api-Version': '2022-11-28'
@@ -28,17 +29,58 @@ async function getOctokit () {
     console.log('error getting octokit');
     console.log(error);
   }
-
 }
 
-export async function getBranches (owner, repo) {
+export async function getOrganizationRepositoryNames () {
   try {
-    const results = await octokit.request('GET /repos/NBBI-TEST/hello_world/branches', {
-      owner: 'NBBI-TEST',
-      repo: 'hello_world',
+    const results = await octokit.request(`GET /orgs/${ORGANIZATION_NAME}/repos`, {
+      org: ORGANIZATION_NAME,
+      headers
+    });
+    return results.data.map((repo) => {
+      return repo.name;
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getBranches (repo) {
+  try {
+    const results = await octokit.request(`GET /repos/${ORGANIZATION_NAME}/${repo}/branches`, {
+      owner: ORGANIZATION_NAME,
+      repo,
       headers
     });  
-    return results;
+    return results.data;
+  } catch (error) {
+    console.log('error getting branches');
+    console.log(error);
+  }
+}
+
+export async function compareCommits (repo, basehead) {
+  try {
+    const results = await octokit.request(`GET /repos/${ORGANIZATION_NAME}/${repo}/compare/${basehead}`, {
+      basehead,
+      owner: ORGANIZATION_NAME,
+      repo,
+      headers
+    });  
+    return results.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getCommit (repo, ref) {
+  try {
+    const results = await octokit.request(`GET /repos/${ORGANIZATION_NAME}/${repo}/commits/${ref}`, {
+      owner: ORGANIZATION_NAME,
+      repo,
+      ref
+    });
+    return results.data;
   } catch (error) {
     console.log(error);
   }
